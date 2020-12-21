@@ -1,12 +1,11 @@
+// +build gofuzz
 package strfuncs
 
+import fuzz "github.com/google/gofuzz"
+
 func FuzzCountChars(data []byte) int {
-	s := string(data)
-	r := CountChars(s)
-
-	if len(s) == r {
-		return 1
-	}
-
-	return -1
+	var s string
+	fuzz.NewFromGoFuzz(data).Fuzz(&s)
+	CountChars(s)
+	return 0
 }
