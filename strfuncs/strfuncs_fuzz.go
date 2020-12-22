@@ -16,7 +16,7 @@ func FuzzConvertToBool(data []byte) int {
 		}
 	}
 
-	return 1
+	return -1
 }
 
 // Adam's original example
