@@ -1,11 +1,22 @@
 // +build gofuzz
 package interfacing
-
-import fuzz "github.com/google/gofuzz"
+import(
+  "encoding/json"
+)
 
 func FuzzInterfacing(data []byte) int {
-	var shape Rect
-	fuzz.NewFromGoFuzz(data).Fuzz(&shape)
-	shape.Area()
-	return 0
+	r := &Rect{}
+
+  err := json.Unmarshal(data, r)
+  if err != nil {
+    return -1
+  }
+
+  expected := r.Width * r.Height
+
+	area := r.Area()
+  if (area != expected) {
+    panic("Area: is not equal and has caused problem!")
+  }
+	return 1
 }
