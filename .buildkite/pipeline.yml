@@ -1,6 +1,8 @@
 steps:
   - name: ":golang: build & test :codeclimate:"
     command: .buildkite/test.sh
+    soft_fail:
+      - exit_status: 124
     agents:
       type: aws-buildkite-agent
       environment: sandpit
