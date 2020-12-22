@@ -1,0 +1,6 @@
+steps:
+  - name: ":golang: build & test :codeclimate:"
+    command: .buildkite/test.sh
+    agents:
+      type: aws-buildkite-agent
+      environment: sandpit
